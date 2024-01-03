@@ -1,0 +1,58 @@
+#!/bin/bash
+# Edition : Stable Edition V2.0
+# Auther  : Muh Aripin Ilham
+# (C) Copyright 2023-2024 By  Under Tunnel
+# =========================================
+#!/bin/bash
+clear
+repo=https://raw.githubusercontent.com/UperTunnel/access/main/name
+ipsaya=$(wget -qO- ipinfo.io/ip);
+data_server=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
+date_list=$(date +"%Y-%m-%d" -d "$data_server")
+useexp=$(wget -qO- ${repo} | grep $ipsaya | awk '{print $4}')
+if [[ $date_list < $useexp ]]; then
+echo -ne
+else
+exit
+fi
+REPOS='https://package.makhlukvpnmy.id/'
+echo " ----->> Downloading Toll UdpCustom........"
+sleep 1
+wget -q --show-progress --load-cookies /tmp/cookies.txt "${REPOS}core/custom" -O /usr/sbin/custom >/dev/null 2>&1
+rm -rf /tmp/cookies.txt
+chmod +x /usr/sbin/custom
+echo " ----->> Please Waiting Proses Downloading Default Config UdpCustom........"
+sleep 1
+wget -q --show-progress --load-cookies /tmp/cookies.txt "${REPOS}config/config.json" -O /root/.config/udp/config.json >/dev/null 2>&1
+rm -rf /tmp/cookies.txt
+chmod 644 /root/.config/udp/config.json
+sleep 1
+if [ -z "$1" ]; then
+cat <<EOF > /etc/systemd/system/custom.service
+[Unit]
+Description=UDP Custom by MakhlukVpn
+[Service]
+User=root
+Type=simple
+ExecStart=/usr/sbin/custom server
+WorkingDirectory=/root/.config/udp/
+Restart=always
+RestartSec=2s
+[Install]
+WantedBy=default.target
+EOF
+else
+cat <<EOF > /etc/systemd/system/custom.service
+[Unit]
+Description=UDP Custom
+[Service]
+User=root
+Type=simple
+ExecStart=/usr/sbin/custom server -exclude $1
+WorkingDirectory=/root/.config/udp/
+Restart=always
+RestartSec=2s
+[Install]
+WantedBy=default.target
+EOF
+fi

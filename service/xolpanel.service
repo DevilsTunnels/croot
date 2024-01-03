@@ -1,0 +1,12 @@
+[Unit]
+Description=Simple XolPanel -
+Documentation=crootdidalam
+After=network.target
+
+[Service]
+WorkingDirectory=/root/.config
+ExecStart=/usr/bin/python3 -m xolpanel
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
