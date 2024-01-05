@@ -341,7 +341,7 @@ ProjectAfter=network.target
 
 [Service]
 WorkingDirectory=/root
-ExecStart=/usr/bin/limit-ip vmip
+ExecStart=/usr/local/sbin/croot vmess
 Restart=always
 
 [Install]
@@ -358,7 +358,7 @@ ProjectAfter=network.target
 
 [Service]
 WorkingDirectory=/root
-ExecStart=/usr/bin/limit-ip vlip
+ExecStart=/usr/local/sbin/croot vless
 Restart=always
 
 [Install]
@@ -375,7 +375,7 @@ ProjectAfter=network.target
 
 [Service]
 WorkingDirectory=/root
-ExecStart=/usr/bin/limit-ip trip
+ExecStart=/usr/local/sbin/croot  trojan
 Restart=always
 
 [Install]
